@@ -1,0 +1,282 @@
+$artboard: #d1fffd;
+$eyes: #1fb5a9;
+$light: #ffffff;
+$mouth: #ef877b;
+$pink: #f7c7dd;
+$stroke: #000000;
+
+.artboard {
+  background: $artboard;
+  border: 20px $light solid;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  margin: 50px auto;
+  position: relative;
+  width: 600px;
+}
+
+.jiggly {
+  height: 220px;
+  left: 190px;
+  position: absolute;
+  top: 145px;
+  width: 220px;
+  /* background-color: red; */
+}
+
+.jigglyUpperBody {
+  animation: bounce 0.75s infinite;
+  position: relative;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    bottom: 1px;
+  }
+  25%,
+  75% {
+    bottom: 2px;
+  }
+  50% {
+    bottom: 3px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+.jigglyBody {
+  background: $pink;
+  border: solid 3px $stroke;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 220px;
+  position: absolute;
+  width: 220px;
+  z-index: 2;
+}
+
+.jigglyTop {
+  height: 110px;
+  left: 56px;
+  position: absolute;
+  top: -20px;
+  width: 110px;
+  z-index: 3;
+  /* background-color: red; */
+}
+
+.topElement {
+  background: $pink;
+  border: solid 3px $stroke;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 100px;
+  position: absolute;
+  width: 100px;
+}
+
+.topElement1 {
+  left: 0px;
+  top: 0px;
+}
+
+.topElement2 {
+  height: 60px;
+  left: 50px;
+  top: 50px;
+  width: 60px;
+}
+
+.topElement3 {
+  background: $pink;
+  border-bottom: 3px solid $stroke;
+  height: 30px;
+  left: 40px;
+  position: absolute;
+  top: 70px;
+  transform: rotate(15deg);
+  width: 30px;
+}
+
+.jigglyFace {
+  height: 80px;
+  left: 12px;
+  position: absolute;
+  top: 67px;
+  width: 190px;
+  /* background-color: red; */
+}
+
+.eye {
+  background: $light;
+  border: solid 3px $stroke;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 80px;
+  position: absolute;
+  width: 80px;
+  &:before {
+    background: $eyes;
+    border: solid 3px $stroke;
+    border-radius: 50%;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 64px;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    width: 64px;
+  }
+}
+
+.eyeLight {
+  background: $light;
+  border-radius: 50%;
+  height: 20px;
+  left: 16px;
+  position: absolute;
+  top: 16px;
+  width: 20px;
+}
+
+.eye1 {
+  left: 0px;
+  top: 0px;
+}
+
+.eye2 {
+  left: 110px;
+  top: 0px;
+}
+
+.mouth {
+  background: $mouth;
+  border: solid 3px $stroke;
+  border-radius: 0 0 22px 22px;
+  box-sizing: border-box;
+  height: 11px;
+  left: 84px;
+  position: absolute;
+  top: 80px;
+  width: 22px;
+}
+
+.jigglyArms {
+  height: 32px;
+  left: 45px;
+  position: absolute;
+  top: 165px;
+  width: 130px;
+  /* background-color: red; */
+}
+
+.arm {
+  background: $pink;
+  border-bottom: solid 3px $stroke;
+  border-right: solid 3px $stroke;
+  border-top: solid 3px $stroke;
+  border-radius: 45px / 30px;
+  box-sizing: border-box;
+  height: 30px;
+  position: absolute;
+  width: 45px;
+}
+
+.arm1 {
+  left: 0px;
+  margin: 0;
+  top: 0px;
+  transform: rotate(40deg);
+}
+
+.arm2 {
+  right: 0px;
+  margin: 0;
+  top: 0px;
+  transform: rotate(140deg);
+}
+
+.jigglyLegs {
+  height: 40px;
+  left: 25px;
+  position: absolute;
+  top: 190px;
+  width: 170px;
+  z-index: 1;
+  /*background-color: red;*/
+}
+
+.leg {
+  background: $pink;
+  border: solid 3px $stroke;
+  border-radius: 60px / 40px;
+  box-sizing: border-box;
+  height: 40px;
+  position: absolute;
+  width: 60px;
+}
+
+.leg1 {
+  left: 0px;
+  margin: 0;
+  top: 0px;
+  transform: rotate(160deg);
+}
+
+.leg2 {
+  right: 0px;
+  margin: 0;
+  top: 0px;
+  transform: rotate(20deg);
+}
+
+.jigglyEars {
+  height: 100px;
+  left: 10px;
+  position: absolute;
+  top: -5px;
+  width: 200px;
+  /* background-color: red; */
+}
+
+.ear {
+  background: $pink;
+  border: solid 3px $stroke;
+  border-radius: 100px / 200px;
+  box-sizing: border-box;
+  height: 200px;
+  position: absolute;
+  width: 100px;
+  &:before {
+    background: $stroke;
+    border-radius: 70px / 170px;
+    content: "";
+    display: block;
+    height: 170px;
+    left: 12px;
+    position: absolute;
+    top: 10px;
+    width: 70px;
+  }
+}
+
+.ear1 {
+  left: 20px;
+  margin: 0;
+  top: -20px;
+  transform: rotate(-40deg);
+}
+
+.ear2 {
+  right: 20px;
+  margin: 0;
+  top: -20px;
+  transform: rotate(40deg);
+}
+
+body {
+  background-color: #eaedf1;
+}
