@@ -1,0 +1,56 @@
+{
+  "name": "os-helpdesk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack-dev-server & npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puffdesk/os-helpdesk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puffdesk/os-helpdesk/issues"
+  },
+  "homepage": "https://github.com/puffdesk/os-helpdesk#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.12.3",
+    "moment": "^2.29.1",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.6.1",
+    "react": "^17.0.2",
+    "react-color": "^2.19.3",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^10.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^5.2.0",
+    "isomorphic-fetch": "^2.2.1",
+    "nodemon": "^1.18.9",
+    "sass": "^1.32.8",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  }
+}
