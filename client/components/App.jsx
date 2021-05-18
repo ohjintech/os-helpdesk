@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import InputForm from './InputForm.jsx';
+import { Container } from '@material-ui/core';
 import '../style.scss'
 
 function App () {
     return (
-      <div>
-        <h1>Hello World!</h1>
-      </div>
+      <Container>
+        <InputForm />
+      </Container>
     )
 };
 
