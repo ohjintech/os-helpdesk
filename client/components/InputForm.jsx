@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { InputLabel, OutlinedInput, FormControl, FormControlLabel, Checkbox, Input, Button, makeStyles } from '@material-ui/core';
 import '../style.scss'
+// import GetCategory from './GetCategory.jsx'
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -12,8 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const categoryCheckboxes = [];
-const categories = {0: "React", 1: "Redux", 2: "Node.js", 3: "Express"}
+
 
 const InputForm = () => {
   // custom hook for react-hook-form
@@ -28,38 +29,10 @@ const InputForm = () => {
   // It is useful for determining what to render.
   console.log(watch('example'));
   // Checkbox options. This should be populated with fetch request to category table
-  const [state, setState] = React.useState ({checked0: false});
-  //   {
-  //   checkedA: true,
-  //   checkedB: true,
-  //   checkedF: true,
-  //   checkedG: true,
-  //   }
+
   
-  for (let key in categories){
-    categoryCheckboxes.push(
-      <FormControlLabel
-      className={classes.margin} 
-      key={categories[key]}
-      control={
-        <Checkbox
-          checked={state.checkedB}
-          onChange={handleChange}
-          name={categories[key]}
-          key={key}
-          color={'primary'}
-        />
-        }
-        label={categories[key]}
-      />
-    )
-  };
 
 
-  // Event method for checkbox (for stretch feature)
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <div>
@@ -79,7 +52,6 @@ const InputForm = () => {
             label="React"
           />
           */}
-          {categoryCheckboxes}
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="field-problem">Problem</InputLabel>
             <OutlinedInput
@@ -125,7 +97,21 @@ const InputForm = () => {
               {...register("field-zoom")}
             />
           </FormControl>
-
+          {/* <GetCategory /> */}
+          {/* <FormControlLabel
+              className={classes.margin} 
+              key={categories[key]}
+              control={
+                <Checkbox
+                  checked={state.checkedB}
+                  onChange={handleChange}
+                  name={categories[key]}
+                  key={key}
+                  color={'primary'}
+                />
+                }
+                label={categories[key]}
+              /> */}
           <Button className={classes.margin} variant="contained" color="primary" type="submit" >
             Submit
           </Button>
