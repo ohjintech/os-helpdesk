@@ -58,6 +58,15 @@ app.use(express.static('client'));
   console.log(`Server listening on port: ${PORT}...`);
 });
 
+// check if user exists
+// validate user
+
+// submit ticket
+// get all tickets
+// get tickets by category
+
+// submit comment on ticket
+
 
 module.exports = app;
 
