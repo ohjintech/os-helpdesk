@@ -280,3 +280,12 @@ $stroke: #000000;
 body {
   background-color: #eaedf1;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
