@@ -5,6 +5,15 @@ $mouth: #ef877b;
 $pink: #f7c7dd;
 $stroke: #000000;
 
+body {
+  background-color: white;
+}
+
+#root {
+  padding: 30px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .artboard {
   background: $artboard;
   border: 20px $light solid;

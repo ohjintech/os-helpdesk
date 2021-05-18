@@ -1,3 +1,5 @@
+import InputForm from './InputForm.jsx';
+import { Container } from '@material-ui/core';
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from './Signin';
@@ -12,6 +14,9 @@ function App () {
 
     return (
       <div>
+      <Container>
+        <InputForm />
+      </Container>
         <Router>
         <AuthContext.Provider value={providerUser}>
           <Switch>
