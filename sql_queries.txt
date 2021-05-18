@@ -1,0 +1,21 @@
+INSERT INTO "public"."CohortTable"(name) VALUES ('LA42');
+INSERT INTO "public"."CohortTable"(name) VALUES ('LA43');
+INSERT INTO "public"."CohortTable"(name) VALUES ('LA44');
+INSERT INTO "public"."CohortTable"(name) VALUES ('NY25');
+INSERT INTO "public"."CohortTable"(name) VALUES ('NY26');
+INSERT INTO "public"."CohortTable"(name) VALUES ('PTRI1');
+INSERT INTO "public"."CohortTable"(name) VALUES ('PTRI2');
+
+INSERT INTO "public"."UserType"(role) VALUES ('admin');
+INSERT INTO "public"."UserType"(role) VALUES ('fellow');
+INSERT INTO "public"."UserType"(role) VALUES ('resident')
+
+INSERT INTO "public"."Categories"(description) VALUES ('frontend');
+INSERT INTO "public"."Categories"(description) VALUES ('backend');
+INSERT INTO "public"."Categories"(description) VALUES ('database');
+INSERT INTO "public"."Categories"(description) VALUES ('build_tool');
+INSERT INTO "public"."Categories"(description) VALUES ('dev_tool');
+
+INSERT INTO "public"."UserTable"(username, password, "cohortID", "usertypeID") VALUES ('csadmin', 'fizzbuzz', 1, 1);
+INSERT INTO "public"."UserTable"(username, password, "cohortID", "usertypeID") VALUES ('csfellow', 'fizzbuzz', 1, 2);
+INSERT INTO "public"."UserTable"(username, password, "cohortID", "usertypeID") VALUES ('horseQL', 'fizzbuzz', 1, 3);

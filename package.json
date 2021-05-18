@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack-dev-server & npm start"
+    "dev": "NODE_ENV=development webpack-dev-server & npm start",
+    "build-win": "cross-env NODE_ENV=production webpack",
+    "dev-win": "cross-env process.env.NODE_ENV=development concurrently \"webpack-dev-server --open\"  \"nodemon server/server.js\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "express": "^4.12.3",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
+    "pg": "^8.6.0",
     "prop-types": "^15.6.1",
     "react": "^17.0.2",
     "react-color": "^2.19.3",
@@ -41,8 +44,8 @@
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",
-    "concurrently": "^4.1.0",
-    "cross-env": "^5.2.0",
+    "concurrently": "^4.1.2",
+    "cross-env": "^5.2.1",
     "css-loader": "^5.2.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.18.9",
