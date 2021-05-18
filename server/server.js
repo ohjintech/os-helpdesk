@@ -7,6 +7,7 @@ const PORT = 3333;
 const app = express();
 
 const ticketRouter = require('./routes/ticket');
+const ticketModel = require('./models/db');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -15,11 +16,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/')));
 app.use(express.static('client'));
 
+
 /**
  * define route handlers
  */
 //  app.use('/auth', authRouter);
- app.use('/ticket', ticketRouter);
+app.use('/ticket', ticketRouter);
+
+// endpoints
+// /signin ->  validateUser, startSession, setCookie
+// /getCohortList
+// /signup -> createUser, startSession, setCookie
+// /ticket -> getTickets,  
+// /getCategories
+// /ticket/create -> createTicket, 
+// 
+
+// history:
+// /getTicketsByUserID
+
+// everyone: can see tickets
+// students: can submit tickets (action buttons disabled)
+// fellows: can close tickets (action buttons enabled)
+// admins: can close tickets, change usertype, add users, add/delete cohorts
+
 
 /** Error Handling */
 

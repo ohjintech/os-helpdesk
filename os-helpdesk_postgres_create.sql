@@ -10,7 +10,6 @@ CREATE TABLE "UserTable" (
 );
 
 
-
 CREATE TABLE "TicketTable" (
 	"TicketID" serial NOT NULL UNIQUE,
 	"UserID" int NOT NULL,

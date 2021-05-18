@@ -5,12 +5,20 @@ const authController = require('./controllers/authController');
 
 const router = express.Router();
 
+// endpoints
+// /signin ->  validateUser, startSession, setCookie
+// /getCohortList
+// /signup -> createUser, startSession, setCookie
+// /ticket -> getTickets,  
+// /getCategories
+// /ticket/create -> createTicket, 
+// 
 
 // check if user exists
-// validate user
+// validate user -> validateUser
 
-// submit ticket
-// get all tickets
+// submit ticket -> createTicket 
+// get all tickets -> getTickets
 // get tickets by category
 
 // submit comment on ticket

@@ -1,16 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const ticketController = require('./controllers/ticketController');
+const ticketController = require('../controllers/ticketController');
 
-router.get('/', ticketController.gettickets, (req, res) => {
-  res.status(200).json(res.locals.alltickets);
+
+
+// endpoints
+// /signin ->  validateUser, startSession, setCookie
+// /getCohortList
+// /signup -> createUser, startSession, setCookie
+// /ticket -> getTickets,  
+// /getCategories
+// /ticket/create -> createTicket, 
+// 
+
+router.get('/', ticketController.getTickets, (req, res) => {
+  res.status(200).json(res.locals.allTickets);
 });
 
-router.post('/', ticketController.postticket,(req, res) => {
-  res.status(200).json(res.locals.addedticket);
+router.post('/create', ticketController.createTicket,(req, res) => {
+  res.status(200).json(res.locals.createdTicket);
 });
 
-router.delete('/:itemText',  ticketController.deleteticket,(req, res) => {
-  res.status(200).json(res.locals.deletedticket);
+router.put('/:ticketId', ticketController.updateTicket,(req, res) => {
+  res.status(200).json(res.locals.updatedTicket);
 });
 
+router.delete('/:ticketId',  ticketController.deleteTicket,(req, res) => {
+  res.status(200).json(res.locals.deletedTicket);
+});
+
+module.exports = router;
