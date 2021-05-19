@@ -8,8 +8,12 @@ const ticketController = require('./controllers/ticketController');
 const PORT = 3000;
 const app = express();
 
-const ticketRouter = require('./routes/ticket');
-const ticketModel = require('./models/db');
+
+const signupRouter = require('./routes/signupRouter');
+const loginRouter = require('./routes/loginRouter');
+const ticketRouter = require('./routes/ticketRouter');
+const userController = require('./controllers/userController');
+const sessionController = require('./controllers/sessionController');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -29,15 +33,20 @@ app.get('/categories', ticketController.getCategories, (req, res) => {
 /**
  * define route handlers
  */
-//  app.use('/auth', authRouter);
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
 app.use('/ticket', ticketRouter);
 
+app.get('/secret',  sessionController.verifyCookie,  (req, res) => {
+  if (res.locals.isCookieValid) res.sendFile(path.join(__dirname, '../views/secret.html'));
+   else res.status(200).send('You must be signed in to view this page');
+});
 // endpoints
-// /signin ->  validateUser, startSession, setCookie
-// /getCohortList
+// /login ->  validateUser, startSession, setCookie
+// ticket/getCohortList
 // /signup -> createUser, startSession, setCookie
 // /ticket -> getTickets,  
-// /getCategories
+// /ticket/getCategories
 // /ticket/create -> createTicket, 
 // 
 
