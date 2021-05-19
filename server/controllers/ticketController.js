@@ -35,35 +35,35 @@ ticketController.createTicket = (req, res, next) => {
 
 // deconstruct request body from front end 
  const {
-   userId, 
-   categoryId, 
-   problemStatement, 
-   expectedBehavior, 
-   triedSolution, 
-   suspectedIssue, 
-   zoomLink, 
-   status, 
-   responseText, 
-   responderId, 
-   createdAt, 
-   resolvedAt, 
-   imageLinks
+  UserID, 
+  description, //categoryID
+  ProblemStatement, 
+  ExpectedBehavior, 
+  TriedSolution, 
+  SuspectedIssue, 
+  ZoomLink, 
+  
   } = req.body;
 
+  // add additional info about the ticket
+  const status = 'Open';
+  const created_at = new Date().toString();
+  const image_links = '';
+
  const values = [
-  userId, 
-  categoryId, 
-  problemStatement, 
-  expectedBehavior,
-  triedSolution, 
-  suspectedIssue, 
-  zoomLink, 
-  status,
-  responseText, 
-  responderId,
-  createdAt,
-  resolvedAt,
-  imageLinks
+  UserID, 
+  CategoryID, 
+  ProblemStatement, 
+  ExpectedBehavior, 
+  TriedSolution, 
+  SuspectedIssue, 
+  ZoomLink, 
+  status, 
+  response, 
+  responderID, 
+  created_at, 
+  resolved_at, 
+  image_links
   ];
  
  // make query string
@@ -88,20 +88,38 @@ ticketController.createTicket = (req, res, next) => {
 };
 
 
-/** READ TICKET */
+/** READ TICKET FCNS */
 
-// gets all tickets and loads them as an array of objects into res.locals object
-ticketController.getTickets = (req, res, next) => {
+// gets basic information about a ticket to show on the dashboard
+ticketController.getTicketDashInfo = (req, res, next) => {
   // make a query string (SQL query)
-  const queryStr = 'SELECT * FROM "public"."TicketTable" LIMIT 100'
 
+  // problem statement
+  // category <--FK. needs some type of JOIN
+  // created by <-- FK. needs some type of JOIN
+  // created at
+  // cohort <-- FK. needs some type of JOIN
+  // reviewer <-- FK. needs some type of JOIN
+  // status
+  
+ 
+  //attempting to join responderID with 
+  //INNER JOIN "public"."UserTable" ON U."UserID" = T."responderID"
+
+// gets detailed information about a ticket to show on the modal
+ticketController.getTicketInfo = (req, res, next) => {
+
+  const queryStr = 'SELECT CAT.description, CO."name" as cohort, U.username, T.*'+
+  'FROM "public"."TicketTable" T '+
+  'INNER JOIN "public"."Categories" CAT ON CAT."CategoryID" = T."CategoryID"'+
+  'INNER JOIN "public"."UserTable" U ON U."UserID" = T."UserID"'+
+  'INNER JOIN "public"."CohortTable" CO ON CO."CohortID" = U."cohortID"'
+  
   // make an async query using db.query and pass in query string
   db.query(queryStr)
-  .then(data => { // data from the database
-      // console.log('DATA', data.rows);
-      // return next
-      console.log('retrieved data: ', data)
-      res.locals.allTickets = data.rows;
+  .then(data => {
+      console.log('Ticket Detail: ', data)
+      res.locals.ticketInfo = data.rows;
       return next();
     })
   // calling global eror handler
