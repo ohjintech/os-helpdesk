@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
-// const authController = require('./controllers/authController');
-// const ticketController = require('./controllers/ticketController');
 const cookieParser = require('cookie-parser');
 
+// const authRouter = require('./routes/authenticate');
 const PORT = 3333;
 const app = express();
+
+const ticketRouter = require('./routes/ticket');
+const ticketModel = require('./models/db');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -15,41 +17,47 @@ app.use(express.static(path.join(__dirname, '../client/')));
 app.use(express.static('client'));
 
 
-// // can we do a router
-// app.get(  '/secret',  authController.verifyCookie,  (req, res) => {
-//    if (res.locals.isCookieValid) res.sendFile(path.join(__dirname, '../views/secret.html'));
-//     else res.status(200).send('You must be signed in to view this page');
-// });
+/**
+ * define route handlers
+ */
+//  app.use('/auth', authRouter);
+app.use('/ticket', ticketRouter);
 
-// app.post('/ticket', ticketController.postticket,(req, res) => {
-//     res.status(200).json(res.locals.addedticket);
-// });
+// endpoints
+// /signin ->  validateUser, startSession, setCookie
+// /getCohortList
+// /signup -> createUser, startSession, setCookie
+// /ticket -> getTickets,  
+// /getCategories
+// /ticket/create -> createTicket, 
+// 
 
-// app.delete('/ticket/:itemText',  ticketController.deleteticket,(req, res) => {
-//     res.status(200).json(res.locals.deletedticket);
-// });
+// history:
+// /getTicketsByUserID
 
-// app.get('/ticket', ticketController.gettickets, (req, res) => {
-//     res.status(200).json(res.locals.alltickets);
-// });
+// everyone: can see tickets
+// students: can submit tickets (action buttons disabled)
+// fellows: can close tickets (action buttons enabled)
+// admins: can close tickets, change usertype, add users, add/delete cohorts
 
-// app.post( '/signin', authController.verifyUser, authController.setCookie, (req, res) => {
-//     if (res.locals.isLoggedIn) res.redirect('/secret');
-//     else res.status(200).send('unsuccessful login attempt');
-// });
 
-// app.use((req, res) => res.status(404).send('Error 404'));
+/** Error Handling */
 
-// app.use((err, req, res, next) => {
-//   const defaultErr = {
-//     log: 'Express error handler caught unknown middleware error',
-//     status: 500,
-//     message: { err: 'An error occurred' },
-//   };
-//   const errorObj = Object.assign({}, defaultErr, err);
-//   console.log(errorObj.log);
-//   return res.status(errorObj.status).json(errorObj.message);
-// });
+// catch-all route handler for any requests to an unknown route
+app.use((req, res) => res.status(404).send('Error 404'));
+
+// global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
+});
+
 
 /**
  * start server
@@ -57,7 +65,6 @@ app.use(express.static('client'));
  app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
-
 
 module.exports = app;
 
