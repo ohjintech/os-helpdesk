@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TicketDetails from './TicketDetails'
 
 
 const useStyles = makeStyles({
@@ -19,6 +20,18 @@ const useStyles = makeStyles({
 export default function TicketsList() {
   const classes = useStyles();
   const [tickets, setTickets] = useState([]);
+  const [currentModal, setCurrentModal] = useState([]);
+  // modal controller
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = (e, row) => {
+    setCurrentModal(row)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     fetch('/ticket')
@@ -35,6 +48,7 @@ export default function TicketsList() {
             <TableCell>Problem Statement</TableCell>
             <TableCell align="right">Category</TableCell>
             <TableCell align="right">Created by</TableCell>
+            <TableCell align="right">Cohort</TableCell>
             <TableCell align="right">Created at</TableCell>
             <TableCell align="right">Reviewer</TableCell>
             <TableCell align="right">Status</TableCell>
@@ -42,10 +56,11 @@ export default function TicketsList() {
         </TableHead>
         <TableBody>
           {tickets.map((row) => (
-            <TableRow key={row.TicketID} onClick={() => console.log(row.TicketID)}>
+            <TableRow key={row.TicketID} onClick={e => handleOpen(e, row)}>
               <TableCell component="th" scope="row">
                 {row.ProblemStatement}
               </TableCell>
+              <TableCell align="right">{row.CategoryID}</TableCell>
               <TableCell align="right">{row.CategoryID}</TableCell>
               <TableCell align="right">{row.UserID}</TableCell>
               <TableCell align="right">{row.created_at}</TableCell>
@@ -55,6 +70,7 @@ export default function TicketsList() {
           ))}
         </TableBody>
       </Table>
+      {open && <TicketDetails open={open} onClose={handleClose} details={currentModal}/>}
     </TableContainer>
   );
 }
