@@ -12,21 +12,20 @@ function App () {
   const [user, setUser] = useState(null);
   const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
-    return (
-      <div>
-      <Container>
-        <InputForm />
-      </Container>
-        <Router>
-        <AuthContext.Provider value={providerUser}>
-          <Switch>
-            <Route component={SignIn} exact path="/"/>
-            <Route component={SignUp} exact path="/signup"/>
-          </Switch>
-        </AuthContext.Provider>
-      </Router>
-      </div>
-    )
+  return (
+    <div>
+    <InputForm />
+    <Router>
+      <AuthContext.Provider value={providerUser}>
+        <Switch>
+          <Route component={SignIn} exact path="/"/>
+          <Route component={SignUp} exact path="/signup"/>
+          <Route component={InputForm} exact path="/resident"/>
+        </Switch>
+      </AuthContext.Provider>
+    </Router>
+    </div>
+  )
 };
 
 export default App;
