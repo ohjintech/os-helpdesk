@@ -17,7 +17,7 @@ userController.createUser = (req, res, next) => {
     cohortID, 
     usertypeID
     } = req.body;
-  
+    
    const values = [
 
     ];
