@@ -189,7 +189,7 @@ ticketController.getCategories = (req, res, next) => {
     .then(data => { // data from the database
         // console.log('DATA', data.rows);
         // return next
-        console.log('retrieved data: ', data)
+        console.log('retrieved data: ', data.rows)
         // res.locals.allTickets = data.rows;
         res.locals.categories = data.rows;
         return next();

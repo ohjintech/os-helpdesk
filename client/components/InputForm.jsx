@@ -31,15 +31,12 @@ const InputForm = () => {
     // fetch request to the database
     // ...asking for all categories
     fetch('/categories/')
-    // .then(res => {
-    //   console.log('res', res.text());
-    //   res.text()
-    // })
+    .then(res => res.json())
     .then(data => {
-      console.log(data);
+      // console.log('data', data);
       setCategories(data);
       //[{ "CategoryID": 1, "description": "frontend"}, {"CategoryID": 2, "description": "backend"}]
-      //setCategories([[1,"React"], [2, "Redux"], [3, "Node.js"], [4, "Express"]]);
+      // setCategories([[1,"React"], [2, "Redux"], [3, "Node.js"], [4, "Express"]]);
     })
     .catch(err => console.log('Get Category Error :', err))
 
@@ -122,7 +119,7 @@ const InputForm = () => {
                   {...register("field-category")}
                 >
                   <option aria-label="None" value="" />
-                  {/* {categories.map(category => <option value={category[CategoryID]}>{category[description]}</option>)} */}
+                  {categories.map(category => <option value={category.CategoryId}>{category.description}</option>)}
                 </Select>
             </FormControl>
           <FormControl fullWidth className={classes.margin} variant="outlined">

@@ -35,7 +35,7 @@ module.exports = {
   devServer: {
     publicPath: '/build',
     proxy: {
-      '/': {
+      '/categories/**': {
         target: 'http://localhost:3333',
         secure: false
       }

@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, '../client/')));
 app.use(express.static('client'));
 
 app.get('/categories', ticketController.getCategories, (req, res) => {
-  console.log(res.locals.categories);
-  res.status(200).json(res.locals.categories);
+  console.log('res.locals.categories', res.locals.categories);
+  res.status(200).send(res.locals.categories);
 });
 /**
  * define route handlers
