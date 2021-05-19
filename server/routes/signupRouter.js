@@ -14,8 +14,8 @@ const router = express.Router();
 // /ticket/create -> createTicket, 
 // 
 
-router.get('/', (req, res) = {
-    res.render('index.html', {error: null})
+router.get('/', (req, res) => {
+    res.status(200).send('index.html', {error: null})
 })
 
 
