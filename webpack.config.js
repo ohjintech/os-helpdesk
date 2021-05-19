@@ -35,7 +35,7 @@ module.exports = {
     publicPath: '/build',
     contentBase: path.join(__dirname, 'client'),
     proxy: {
-      '/': {
+      '/**': {
         target: 'http://localhost:3000',
         secure: false,
       },

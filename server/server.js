@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
+const ticketController = require('./controllers/ticketController');
+// const cors = require('cors');
 
 // const authRouter = require('./routes/authenticate');
 const PORT = 3000;
@@ -21,8 +22,10 @@ app.get('/', (req, res) => {
 
 app.use(express.static('client'));
 
-
-
+app.get('/categories', ticketController.getCategories, (req, res) => {
+  console.log('res.locals.categories', res.locals.categories);
+  res.status(200).send(res.locals.categories);
+});
 /**
  * define route handlers
  */

@@ -30,14 +30,36 @@ const InputForm = () => {
   useEffect(() => {
     // fetch request to the database
     // ...asking for all categories
-    setCategories([[1,"React"], [2, "Redux"], [3, "Node.js"], [4, "Express"]]);
+    fetch('/categories/')
+    .then(res => res.json())
+    .then(data => {
+      // console.log('data', data);
+      setCategories(data);
+      //[{ "CategoryID": 1, "description": "frontend"}, {"CategoryID": 2, "description": "backend"}]
+      // setCategories([[1,"React"], [2, "Redux"], [3, "Node.js"], [4, "Express"]]);
+    })
+    .catch(err => console.log('Get Category Error :', err))
+
+
   }, [])
 
 
   // custom hook for react-hook-form
   const { register, handleSubmit, watch, formState: { errors }} = useForm();
-  // if the form submit was successful, invoke this callback
-   const onSubmit = (data, e) => console.log('line 50', data, e, ticketInfo);
+  // if the form submit was successful, post the content
+   const onSubmit = (data, e) => {
+      console.log('line 50', data, e, ticketInfo);
+      fetch('/ticket/create', {
+      method: 'POST',
+      headers: {'Content-Type': 'Application/JSON'},
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => console.log('Get Category Error :', err))
+   }
   // if the form submit was unsuccessful, invoke this callback
    const onError = (errors, e) => console.log(errors, e);
   // apply style classes
@@ -97,7 +119,7 @@ const InputForm = () => {
                   {...register("field-category")}
                 >
                   <option aria-label="None" value="" />
-                  {categories.map(category => <option value={category[0]}>{category[1]}</option>)}
+                  {categories.map(category => <option value={category.CategoryId}>{category.description}</option>)}
                 </Select>
             </FormControl>
           <FormControl fullWidth className={classes.margin} variant="outlined">

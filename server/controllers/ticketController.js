@@ -192,16 +192,17 @@ db.query(queryStr, ticketId)
 
 // gets all ticket categories
 ticketController.getCategories = (req, res, next) => {
-
+    console.log('ticketController', req);
     // make a query string (SQL query)
-    const queryStr = 'SELECT * FROM "public"."Categories" LIMIT 100'
+    const queryStr = 'SELECT * FROM "public"."Categories"'
 
     // make an async query using db.query and pass in query string
     db.query(queryStr)
     .then(data => { // data from the database
         // console.log('DATA', data.rows);
         // return next
-        console.log('Getting issue categories: ', data)
+        console.log('retrieved data: ', data.rows)
+        // res.locals.allTickets = data.rows;
         res.locals.categories = data.rows;
         return next();
       })
