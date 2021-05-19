@@ -91,4 +91,4 @@ npm build dist --prod
 
 MIT
 
-**Free Software, Hell Yeah!**
+**Free Software!**

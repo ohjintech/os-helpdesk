@@ -7,7 +7,7 @@ const ticketController = {};
 // x getTicket
 // x updateTicket
 // x deleteTicket
-// getCategories -> ticketController
+// x getCategories -> ticketController
 // getCohortList -> userController
 // createUser
 // updateuser
@@ -28,6 +28,7 @@ const ticketController = {};
 
 
 
+/** CREATE TICKET */
 
 // creates a ticket and posts to db
 ticketController.createTicket = (req, res, next) => {
@@ -80,9 +81,14 @@ ticketController.createTicket = (req, res, next) => {
       return next();
     })
     // catch error
-    .catch(err => next(err));
+    .catch(err => next({
+      log: 'ticketController.createTicket: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.',
+      message: {err: 'ticketController.createTicket: ERROR: Check server logs for details'}
+  }));
 };
 
+
+/** READ TICKET */
 
 // gets all tickets and loads them as an array of objects into res.locals object
 ticketController.getTickets = (req, res, next) => {
@@ -105,7 +111,7 @@ ticketController.getTickets = (req, res, next) => {
   }))
 };
 
-
+/** UPDATE TICKET */
 
 // allow residents to update text as well as fellows updating the resolved status
 ticketController.updateTicket = (req, res, next) => {
@@ -160,6 +166,8 @@ db.query(queryStr, values)
    .catch(err => next(err));
 }
 
+/** DELETE TICKET */
+
 // have the option to delete ticket in case something inappropriate gets posted/duplicates get posted
 ticketController.deleteTicket = (req, res, next) => {
 
@@ -175,10 +183,14 @@ db.query(queryStr, ticketId)
   return next();
 })
 // catch error
-.catch(err => next(err));
+.catch(err => next({
+  log: 'ticketController.deleteTicket: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.',
+  message: {err: 'ticketController.deleteTicket: ERROR: Check server logs for details'}
+}));
 }
  
 
+// gets all ticket categories
 ticketController.getCategories = (req, res, next) => {
     console.log('ticketController', req);
     // make a query string (SQL query)
@@ -196,12 +208,9 @@ ticketController.getCategories = (req, res, next) => {
       })
     // calling global eror handler
     .catch(err => next({
-        log: 'ticketController.getTickets: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.',
-        message: {err: 'ticketController.getTickets: ERROR: Check server logs for details'}
+        log: 'ticketController.getCategories: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.',
+        message: {err: 'ticketController.getCategories: ERROR: Check server logs for details'}
     }))
-
-
 }
-
 
 module.exports = ticketController;
