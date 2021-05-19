@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // const authRouter = require('./routes/authenticate');
-const PORT = 3333;
+const PORT = 3000;
 const app = express();
 
 const ticketRouter = require('./routes/ticket');
@@ -13,8 +14,13 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../client/')));
+// Initial Page Request
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../index.html'))
+});
+
 app.use(express.static('client'));
+
 
 
 /**
