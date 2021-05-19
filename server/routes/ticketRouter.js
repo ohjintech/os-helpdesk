@@ -13,8 +13,8 @@ const ticketController = require('../controllers/ticketController');
 // /ticket/create -> createTicket, 
 // 
 
-router.get('/', ticketController.getTickets, (req, res) => {
-  res.status(200).json(res.locals.allTickets);
+router.get('/', ticketController.getTicketInfo, (req, res) => {
+  res.status(200).json(res.locals.ticketInfo);
 });
 
 router.post('/create', ticketController.createTicket,(req, res) => {
