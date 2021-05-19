@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const history = useHistory();
-  const [login, setLogin] = useState();
   const { user, setUser } = useContext(AuthContext);
 
   const signInHandler = (e) => {
@@ -65,6 +64,9 @@ export default function SignIn() {
     //       pathname: `/search-spots`
     //     });
     //   })
+    history.push({
+      pathname: `/dashboard`
+    });
     console.log('Sign In!');
   }
 
@@ -114,7 +116,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/resident" variant="body2">
+              <Link to="/inputform" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const ticketController = require('./controllers/ticketController');
+// const cors = require('cors');
 
 // const authRouter = require('./routes/authenticate');
-const PORT = 3333;
+const PORT = 3000;
 const app = express();
 
 
@@ -17,10 +19,17 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../client/')));
+// Initial Page Request
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../index.html'))
+});
+
 app.use(express.static('client'));
 
-
+app.get('/categories', ticketController.getCategories, (req, res) => {
+  console.log('res.locals.categories', res.locals.categories);
+  res.status(200).send(res.locals.categories);
+});
 /**
  * define route handlers
  */
