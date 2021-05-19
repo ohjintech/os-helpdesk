@@ -91,7 +91,7 @@ ticketController.createTicket = (req, res, next) => {
 /** READ TICKET FCNS */
 
 // gets basic information about a ticket to show on the dashboard
-ticketController.getTicketDashInfo = (req, res, next) => {
+// ticketController.getTicketDashInfo = (req, res, next) => {
   // make a query string (SQL query)
 
   // problem statement
