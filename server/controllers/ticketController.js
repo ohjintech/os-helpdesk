@@ -180,9 +180,9 @@ db.query(queryStr, ticketId)
  
 
 ticketController.getCategories = (req, res, next) => {
-
+    console.log('ticketController', req);
     // make a query string (SQL query)
-    const queryStr = 'SELECT * FROM "public"."TicketTable" LIMIT 100'
+    const queryStr = 'SELECT * FROM "public"."Categories"'
 
     // make an async query using db.query and pass in query string
     db.query(queryStr)
@@ -190,7 +190,8 @@ ticketController.getCategories = (req, res, next) => {
         // console.log('DATA', data.rows);
         // return next
         console.log('retrieved data: ', data)
-        res.locals.allTickets = data.rows;
+        // res.locals.allTickets = data.rows;
+        res.locals.categories = data.rows;
         return next();
       })
     // calling global eror handler

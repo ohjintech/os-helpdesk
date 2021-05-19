@@ -35,8 +35,8 @@ module.exports = {
   devServer: {
     publicPath: '/build',
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
+      '/': {
+        target: 'http://localhost:3333',
         secure: false
       }
     },
