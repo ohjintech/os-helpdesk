@@ -6,7 +6,6 @@ import TicketsList from './TicketsList'
 function Dashboard() {
   return (
     <div>
-      {/* {tickets.map(ticket => <p key={ticket.TicketID}>{ticket.ProblemStatement}</p>)} */}
       <PageHeader/>
       <TicketsList/>
     </div>

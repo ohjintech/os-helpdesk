@@ -37,6 +37,14 @@ app.get('/categories', ticketController.getCategories, (req, res) => {
 // app.use('/login', loginRouter);
 app.use('/ticket', ticketRouter);
 
+// populates dashboard ticket information
+// app.get('/dashboard', 
+//   ticketController.getTicketDashInfo, 
+//   (req, res) => {
+//     res.status(200).send(res.locals.ticketDashInfo)
+//   }
+// );
+
 // app.get('/secret',  sessionController.verifyCookie,  (req, res) => {
 //   if (res.locals.isCookieValid) res.sendFile(path.join(__dirname, '../views/secret.html'));
 //    else res.status(200).send('You must be signed in to view this page');
