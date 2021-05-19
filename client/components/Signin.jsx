@@ -114,7 +114,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="#" variant="body2">
+              <Link to="/resident" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
