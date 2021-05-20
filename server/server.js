@@ -39,9 +39,9 @@ app.use('/ticket', ticketRouter);
 
 // populates dashboard ticket information
 // app.get('/dashboard', 
-//   ticketController.getTicketDashInfo, 
+//   ticketController.getTicketInfo, 
 //   (req, res) => {
-//     res.status(200).send(res.locals.ticketDashInfo)
+//     res.status(200).send(res.locals.ticketInfo)
 //   }
 // );
 
