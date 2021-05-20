@@ -124,51 +124,40 @@ ticketController.getTicketInfo = (req, res, next) => {
 // allow residents to update text as well as fellows updating the resolved status
 ticketController.updateTicket = (req, res, next) => {
   // deconstruct request body from front end
+
+  // console.log('req params wuttt', req.params)
+  // console.log('req body wuttt', req.body)
+  const { ticketId } = req.params;
+
   const {
-    userId,
-    categoryId,
-    problemStatement,
-    expectedBehavior,
-    triedSolution,
-    suspectedIssue,
-    zoomLink,
     status,
-    responseText,
-    responderId,
-    resolvedAt,
-    imageLinks,
-    ticketId,
+    response,
+    responderID,
   } = req.body;
 
+  // resolution time
+  const resolved_at = new Date().toUTCString();
+  console.log('time resolved: ', resolved_at)
+
   const values = [
-    userId,
-    categoryId,
-    problemStatement,
-    expectedBehavior,
-    triedSolution,
-    suspectedIssue,
-    zoomLink,
     status,
-    responseText,
-    responderId,
-    resolvedAt,
-    imageLinks,
+    response,
+    responderID,
+    resolved_at,
     ticketId,
   ];
 
   // make query string
   const queryStr =
     'UPDATE "public"."TicketTable" ' +
-    'SET ("problemStatement", "expectedBehavior", "triedSolution", "suspectedIssue", "zoomLink", "status", "responseText", "responderId", "resolvedAt", "imageLinks") = ' +
-    "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) " +
-    'WHERE "TicketID" = $14;';
+    'SET ("status", "response", "responderID", "resolved_at") = ' +
+    '($1, $2, $3, $4) '+
+    'WHERE "TicketID" = $5;';
 
   // create async db.query
   db.query(queryStr, values)
     // send to res.locals object
-    .then((data) => {
-      console.log("Updating ticket: ", data);
-      res.locals.updatedTicket = data[0];
+    .then(() => {
       return next();
     })
     // catch error
@@ -179,14 +168,8 @@ ticketController.updateTicket = (req, res, next) => {
 
 // have the option to delete ticket in case something inappropriate gets posted/duplicates get posted
 ticketController.deleteTicket = (req, res, next) => {
-<<<<<<< HEAD
-  const { ticketId } = req.body;
-  const queryStr =
-    'DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1 RETURNING *;';
-=======
   const ticketId = [req.params.ticketId]; 
   const queryStr = `DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1`;
->>>>>>> 7ba882eb74461abe1ed454727f7236af731ef7e4
 
   // create async db.query
   db.query(queryStr, ticketId)
