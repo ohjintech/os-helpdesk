@@ -34,7 +34,7 @@ const InputForm = () => {
   // apply style classes
   const classes = useStyles();
   // const { user, setUser } = useContext(AuthContext);
-  const user = "yoko";
+  const user = 1;
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -67,18 +67,19 @@ const InputForm = () => {
   const onSubmit = (data, e) => {
     data.UserID = user;
     console.log("line 51", data, e);
-    //   fetch('/ticket/create', {
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'Application/JSON'},
-    //   body: JSON.stringify(data)
-    // })
+      fetch('/ticket/create', {
+      method: 'POST',
+      headers: {'Content-Type': 'Application/JSON'},
+      body: JSON.stringify(data)
+    })
     // .then(res => res.json())
-    // .then(data => {
-    //   console.log(data);
-    // })
-    // .catch(err => console.log('Submit Form Error :', err))
+    .then(data => {
+      console.log(data);
+      handleClickOpen();
+    })
+    .catch(err => console.log('Submit Form Error :', err))
 
-    handleClickOpen();
+
     reset(data);
 
   };
