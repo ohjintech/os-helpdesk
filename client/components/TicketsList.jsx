@@ -9,8 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TicketDetails from './TicketDetails'
 import { AuthContext } from './contexts/Auth';
-import { DataGrid } from '@material-ui/data-grid';
-
 
 
 const useStyles = makeStyles({
@@ -19,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TicketsList() {
+export default function TicketsList(props) {
   const classes = useStyles();
   const [tickets, setTickets] = useState([]);
   const [currentModal, setCurrentModal] = useState([]);
@@ -37,12 +35,17 @@ export default function TicketsList() {
   };
 
   useEffect(() => {
+    loadData();
+  }, [])
+
+  const loadData = () => {
     fetch('/ticket')
     .then(res => res.json())
     .then(data => data.reverse())
     .then(data => setTickets(data))
     .catch(err => console.error(err))
-  }, [])
+  }
+
   
   return (
     <div>
@@ -51,30 +54,38 @@ export default function TicketsList() {
         <TableHead>
           <TableRow>
             <TableCell>Problem Statement</TableCell>
-            <TableCell align="right">Category</TableCell>
-            <TableCell align="right">Cohort</TableCell>
-            <TableCell align="right">Created by</TableCell>
-            <TableCell align="right">Created at</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="center">Category</TableCell>
+            <TableCell align="center">Cohort</TableCell>
+            <TableCell align="center">Created by</TableCell>
+            <TableCell align="center">Created at</TableCell>
+            <TableCell align="center">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tickets.map((row) => (
+          {tickets.filter(ticket => ticket.ProblemStatement.toLowerCase().includes(props.searchText.toLowerCase()))
+          .map((row) => (
             <TableRow key={row.TicketID} onClick={e => handleOpen(e, row)}>
               <TableCell component="th" scope="row">
                 {row.ProblemStatement}
               </TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.cohort}</TableCell>
-              <TableCell align="right">{row.username}</TableCell>
-              <TableCell align="right">{row.created_at}</TableCell>
-              <TableCell align="right">{row.status ? row.status : "Pending"}</TableCell>
+              <TableCell align="center">{row.description}</TableCell>
+              <TableCell align="center">{row.cohort}</TableCell>
+              <TableCell align="center">{row.username}</TableCell>
+              <TableCell align="center">{row.created_at}</TableCell>
+              <TableCell align="center">{row.status ? row.status : "Pending"}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       {console.log(currentModal)}
-      {open && <TicketDetails open={open} onClose={handleClose} details={currentModal}/>}
+      { open && 
+        <TicketDetails
+        open={open}
+        onClose={handleClose}
+        details={currentModal}
+        setDetails={setCurrentModal}
+        refresh={loadData}/>
+      }
     </TableContainer>
     </div>
   );

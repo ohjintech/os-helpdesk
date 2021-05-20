@@ -50,9 +50,10 @@ export default function SignIn() {
   const { user, setUser } = useContext(AuthContext);
   const [login, setLogin] = useState();
   const [error, setError] = useState(false);
-  
+
   const signInHandler = (e) => {
     e.preventDefault();
+
     fetch('/login', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,13 +61,11 @@ export default function SignIn() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("signin: ", user);
         setUser(data);
         history.push({
           pathname: `/dashboard`
         });
       }).catch(err => setError(true))
-    console.log('Sign In!');
   }
 
   const classes = useStyles();

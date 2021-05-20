@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const [cohort, setCohort] = useState([]);
-  const [newUser, setNewUser] = useState({ UserID: 1 });
+  const [newUser, setNewUser] = useState({ usertypeID: 1 });
   const { user, setUser } = useContext(AuthContext);
   const history = useHistory();
   console.log('user ', user)
@@ -59,19 +59,19 @@ export default function SignUp() {
   
   const signOnHandler = (e) => {
     e.preventDefault();
-
-    // fetch(`/user/signup`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(newUser),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     history.push('/dashboard');
-    //   })
-    setUser(newUser);
-    history.push('/dashboard');
-    console.log('Sign On!')
+    // const { firstname, lastname, cohortID, username, password, usertypeID } = req.body;
+    fetch('/signup', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(login),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setUser(data);
+        history.push({
+          pathname: `/dashboard`
+        });
+      }).catch(err => setError(true))
   }
   
   useEffect(() => {
