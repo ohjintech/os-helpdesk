@@ -161,7 +161,12 @@ ticketController.updateTicket = (req, res, next) => {
       return next();
     })
     // catch error
-    .catch((err) => next(err));
+    .catch((err) => next({
+      log: "ticketController.updateTicket: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.",
+      message: {
+        err: "ticketController.updateTicket: ERROR: Check server logs for details",
+      },
+    }));
 };
 
 /** DELETE TICKET */
