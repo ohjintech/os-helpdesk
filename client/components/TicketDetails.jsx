@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  title: {
+    fontFamily: 'Helvetica',
+    fontSize: '20px'
+  }
 }));
 
 function TicketDetails(props) {
@@ -52,55 +56,67 @@ function TicketDetails(props) {
           <div className={classes.paper}>
             <form className={classes.root} noValidate autoComplete="off">
               <div>
+                <p className={classes.title}>Ticket Details</p>
                 <div>
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="Problem Statement"
                   multiline
-                  rowsMax={4}
+                  rowsMax={6}
                   value={props.details.ProblemStatement}
                   variant="outlined"
+                  disabled
                 />
                 </div>
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="What I expected to happen"
                   multiline
-                  rowsMax={4}
-                  value='bsdfksdjb fsbfksd ufbksdbhkufsdnbilfisugbosfhgks hgs shv sdohkuvbskioskvbs kvbskvs'
+                  rowsMax={6}
+                  value={props.details.ExpectedBehavior}
                   variant="outlined"
+                  disabled
                 />
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="What I've tried"
                   multiline
-                  rowsMax={4}
-                  value='bsdfksdjb fsbfksd ufbksdbhkufsdnbilfisugbosfhgks hgs shv sdohkuvbskioskvbs kvbskvs'
+                  rowsMax={6}
+                  value={props.details.TriedSolution}
                   variant="outlined"
+                  // readOnly={true}
                 />
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="Why I suspect it's not working"
                   multiline
-                  rowsMax={4}
-                  value='bsdfksdjb fsbfksd ufbksdbhkufsdnbilfisugbosfhgks hgs shv sdohkuvbskioskvbs kvbskvs'
+                  rowsMax={6}
+                  value={props.details.SuspectedIssue}
                   variant="outlined"
+                  disabled
                 />
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="Category"
                   multiline
-                  rowsMax={4}
-                  value='bsdfksdjb fsbfksd ufbksdbhkufsdnbilfisugbosfhgks hgs shv sdohkuvbskioskvbs kvbskvs'
+                  rowsMax={6}
+                  value={props.details.description}
                   variant="outlined"
+                  disabled
                 />
+                <a>
+                {props.details.ZoomLink}
+                </a>
                 <TextField
-                  id="outlined-multiline-flexible"
                   label="Zoom Link"
                   multiline
-                  rowsMax={4}
-                  value='bsdfksdjb fsbfksd ufbksdbhkufsdnbilfisugbosfhgks hgs shv sdohkuvbskioskvbs kvbskvs'
+                  rowsMax={6}
+                  value={props.details.ZoomLink}
                   variant="outlined"
+                  disabled
+                />
+                <TextField
+                  label="Response"
+                  multiline
+                  rowsMax={6}
+                  value={props.details.response ? props.details.response : "Waiting for response"}
+                  variant="outlined"
+                  disabled
                 />
               </div>
             </form>
