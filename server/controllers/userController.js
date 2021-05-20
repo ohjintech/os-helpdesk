@@ -1,17 +1,24 @@
 const db = require("../models/db");
 const userController = {};
 
+// creater user
+// update ticket
+// update user
+// delete user
+
+
 // creates a User and posts to db
 userController.createUser = (req, res, next) => {
   // deconstruct request body from front end
-  const { UserID, username, password, cohortID, usertypeID } = req.body;
+  console.log('creating a user');
+  const { username, password, cohortID, usertypeID } = req.body;
 
   const values = [];
 
   // make query string
   const queryStr =
-    'INSERT INTO "public"."UserTable"("UserID", "username", "password","cohortID", "usertypeID") ' +
-    "VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+    'INSERT INTO "public"."UserTable"("username", "password","cohortID", "usertypeID") ' +
+    "VALUES ($1, $2, $3, $4) RETURNING *;";
 
   // create async db.query
   db.query(queryStr, values)

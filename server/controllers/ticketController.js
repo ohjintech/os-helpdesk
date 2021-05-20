@@ -92,7 +92,6 @@ ticketController.createTicket = (req, res, next) => {
 // reviewer <-- FK. needs some type of JOIN
 // status
 
-
 // gets detailed information about a ticket to show on the modal
 ticketController.getTicketInfo = (req, res, next) => {
   const queryStr =
@@ -125,51 +124,40 @@ ticketController.getTicketInfo = (req, res, next) => {
 // allow residents to update text as well as fellows updating the resolved status
 ticketController.updateTicket = (req, res, next) => {
   // deconstruct request body from front end
+
+  // console.log('req params wuttt', req.params)
+  // console.log('req body wuttt', req.body)
+  const { ticketId } = req.params;
+
   const {
-    userId,
-    categoryId,
-    problemStatement,
-    expectedBehavior,
-    triedSolution,
-    suspectedIssue,
-    zoomLink,
     status,
-    responseText,
-    responderId,
-    resolvedAt,
-    imageLinks,
-    ticketId,
+    response,
+    responderID,
   } = req.body;
 
+  // resolution time
+  const resolved_at = new Date().toUTCString();
+  console.log('time resolved: ', resolved_at)
+
   const values = [
-    userId,
-    categoryId,
-    problemStatement,
-    expectedBehavior,
-    triedSolution,
-    suspectedIssue,
-    zoomLink,
     status,
-    responseText,
-    responderId,
-    resolvedAt,
-    imageLinks,
+    response,
+    responderID,
+    resolved_at,
     ticketId,
   ];
 
   // make query string
   const queryStr =
     'UPDATE "public"."TicketTable" ' +
-    'SET ("problemStatement", "expectedBehavior", "triedSolution", "suspectedIssue", "zoomLink", "status", "responseText", "responderId", "resolvedAt", "imageLinks") = ' +
-    "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) " +
-    'WHERE "TicketID" = $14;';
+    'SET ("status", "response", "responderID", "resolved_at") = ' +
+    '($1, $2, $3, $4) '+
+    'WHERE "TicketID" = $5;';
 
   // create async db.query
   db.query(queryStr, values)
     // send to res.locals object
-    .then((data) => {
-      console.log("Updating ticket: ", data);
-      res.locals.updatedTicket = data[0];
+    .then(() => {
       return next();
     })
     // catch error
@@ -204,18 +192,10 @@ ticketController.deleteTicket = (req, res, next) => {
 
 // gets all ticket categories
 ticketController.getCategories = (req, res, next) => {
-  // console.log("ticketController", req);
-  // make a query string (SQL query)
   const queryStr = 'SELECT * FROM "public"."Categories"';
-
   // make an async query using db.query and pass in query string
   db.query(queryStr)
     .then((data) => {
-      // data from the database
-      // console.log('DATA', data.rows);
-      // return next
-      // console.log("retrieved data: ", data.rows);
-      // res.locals.allTickets = data.rows;
       res.locals.categories = data.rows;
       return next();
     })
