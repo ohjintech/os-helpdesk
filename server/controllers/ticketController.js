@@ -51,9 +51,9 @@ ticketController.createTicket = (req, res, next) => {
   db.query(getID)
     .then((data) => {
       // console.log("data:", data.rows);
-      console.log("data:", typeof data.rows);
+      // console.log("data:", typeof data.rows);
       const { CategoryID } = data.rows[0];
-      console.log("CategoryID:", CategoryID);
+      // console.log("CategoryID:", CategoryID);
       return CategoryID;
     })
     .then((id) => {
@@ -71,7 +71,7 @@ ticketController.createTicket = (req, res, next) => {
       db.query(queryStr, values)
         // send to res.locals object
         .then((data) => {
-          console.log("Creating ticket: ", id);
+          // console.log("Creating ticket: ", id);
           res.locals.createdTicket = data[0];
           return next();
         });
@@ -105,7 +105,7 @@ ticketController.getTicketInfo = (req, res, next) => {
   // make an async query using db.query and pass in query string
   db.query(queryStr)
     .then((data) => {
-      console.log("Ticket Detail: ", data);
+      // console.log("Ticket Detail: ", data);
       res.locals.ticketInfo = data.rows;
       return next();
     })
@@ -204,7 +204,7 @@ ticketController.deleteTicket = (req, res, next) => {
 
 // gets all ticket categories
 ticketController.getCategories = (req, res, next) => {
-  console.log("ticketController", req);
+  // console.log("ticketController", req);
   // make a query string (SQL query)
   const queryStr = 'SELECT * FROM "public"."Categories"';
 
@@ -214,7 +214,7 @@ ticketController.getCategories = (req, res, next) => {
       // data from the database
       // console.log('DATA', data.rows);
       // return next
-      console.log("retrieved data: ", data.rows);
+      // console.log("retrieved data: ", data.rows);
       // res.locals.allTickets = data.rows;
       res.locals.categories = data.rows;
       return next();
