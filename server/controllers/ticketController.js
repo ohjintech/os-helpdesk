@@ -92,8 +92,6 @@ ticketController.createTicket = (req, res, next) => {
 // reviewer <-- FK. needs some type of JOIN
 // status
 
-//attempting to join responderID with
-//INNER JOIN "public"."UserTable" ON U."UserID" = T."responderID"
 
 // gets detailed information about a ticket to show on the modal
 ticketController.getTicketInfo = (req, res, next) => {
