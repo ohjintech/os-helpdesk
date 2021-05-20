@@ -63,7 +63,7 @@ export default function SignUp() {
     fetch('/signup', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(login),
+      body: JSON.stringify(newUser),
     })
       .then(response => response.json())
       .then(data => {
@@ -78,6 +78,7 @@ export default function SignUp() {
     fetch('/cohort')
       .then(res => res.json())
       .then(data => setCohort(data))
+      .then(data => console.log(data))
       .catch(err => console.error(err))
   }, [])
 
@@ -124,7 +125,7 @@ export default function SignUp() {
                 <Select
                   native
                   label="Cohort"
-                  onChange={(e) => setNewUser({ ...newUser, cohort: e.target.value })}
+                  onChange={(e) => setNewUser({ ...newUser, cohortID: Number(e.target.value)})}
                 >
                   <option aria-label="None" value="" />
                   {cohort.map((item) => <option key={item.CohortID} id={item.CohortID} value={item.CohortID}>{item.name}</option>)}
