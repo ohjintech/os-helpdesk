@@ -19,12 +19,12 @@ CREATE TABLE "TicketTable" (
 	"TriedSolution" TEXT,
 	"SuspectedIssue" TEXT,
 	"ZoomLink" TEXT,
-	"status" TEXT,
+	"status" TEXT DEFAULT "Open",
 	"response" TEXT,
 	"responderID" int,
-	"created_at" timestamp with time zone,
-	"resolved_at" timestamp with time zone,
-	"image_links" TEXT NOT NULL,
+	"created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	"resolved_at" TIMESTAMP WITH TIME ZONE,
+	"image_links" TEXT,
 	CONSTRAINT "TicketTable_pk" PRIMARY KEY ("TicketID")
 ) WITH (
   OIDS=FALSE
