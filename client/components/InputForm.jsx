@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import HomeIcon from '@material-ui/icons/Home';
 import {
   InputLabel,
   OutlinedInput,
@@ -15,15 +16,14 @@ import {
   DialogTitle,
   Container,
   Paper,
-  ThemeProvider,
 } from "@material-ui/core";
 import { AuthContext } from "./contexts/Auth";
 import "../style.scss";
-// import { resetWarningCache } from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(0),
+    margin: '10px 0',
   },
   padding30: {
     padding: theme.spacing(3),
@@ -31,8 +31,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InputForm = () => {
+  // apply style classes
+  const classes = useStyles();
   // const { user, setUser } = useContext(AuthContext);
-  const user = "user01";
+  const user = "yoko";
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -42,7 +44,6 @@ const InputForm = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     // fetch request to the database asking for all categories
@@ -61,13 +62,11 @@ const InputForm = () => {
     watch,
     formState: { errors },
   } = useForm({ userId: user });
-  // if the form submit was successful, post the content
+
+  // if no error on submit button click, post the content
   const onSubmit = (data, e) => {
     data.UserID = user;
     console.log("line 51", data, e);
-    handleClickOpen();
-    // toggleConfirm({ open: true });
-    // reset(data);
     //   fetch('/ticket/create', {
     //   method: 'POST',
     //   headers: {'Content-Type': 'Application/JSON'},
@@ -78,11 +77,14 @@ const InputForm = () => {
     //   console.log(data);
     // })
     // .catch(err => console.log('Submit Form Error :', err))
+
+    handleClickOpen();
+    reset(data);
+
   };
+
   // if the form submit was unsuccessful, invoke this callback
   const onError = (errors, e) => console.log(errors, e);
-  // apply style classes
-  const classes = useStyles();
 
   // This will watch specified inputs and return their values.
   // It is useful for determining what to render.
@@ -92,7 +94,7 @@ const InputForm = () => {
   return (
     <div>
       <Link to="/dashboard" variant="body2" className={classes.margin}>
-      <u> &lt; Go Back</u>
+        <HomeIcon color="primary" className={classes.margin}/>
       </Link>
       <Container component={Paper} className={classes.padding30}>
         <h1 className={classes.margin}>Puffdesk Input Form</h1>
@@ -185,9 +187,11 @@ const InputForm = () => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary" autoFocus href="/dashboard">
-              OK
-            </Button>
+            <Link to="/dashboard" variant="body2" className={classes.margin}>
+              <Button onClick={handleClose} color="primary" autoFocus>
+                OK
+              </Button>
+            </Link>
           </DialogActions>
         </Dialog>
       </Container>
