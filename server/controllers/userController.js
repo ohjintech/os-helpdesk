@@ -4,25 +4,34 @@ const userController = {};
 // creates a User and posts to db
 userController.createUser = (req, res, next) => {
   // deconstruct request body from front end
-  const { UserID, username, password, cohortID, usertypeID } = req.body;
-
-  const values = [];
+  // const { UserID, username, password, cohortID, usertypeID } = req.body;
+  console.log(req.body);
+  // INSERT INTO "public"."UserTable" ("username", "password", "cohortID", "usertypeID") values ('yoko', 'password', 1, 1)
+  const { username, password, cohortID, usertypeID } = req.body;
+  const values = [username, password, cohortID, usertypeID];
 
   // make query string
   const queryStr =
-    'INSERT INTO "public"."UserTable"("UserID", "username", "password","cohortID", "usertypeID") ' +
-    "VALUES ($1, $2, $3, $4, $5) RETURNING *;";
-
+    'INSERT INTO "public"."UserTable" ("username", "password", "cohortID", "usertypeID") ' +
+    "VALUES($1, $2, $3, $4)";
+  console.log(queryStr);
   // create async db.query
   db.query(queryStr, values)
     // send to res.locals object
     .then((data) => {
       console.log("Creating user: ", data);
-      res.locals.createdUser = data[0];
+      res.locals.createdUser = data.rows[0];
       return next();
     })
     // catch error
-    .catch((err) => next(err));
+    .catch((err) => {next(
+      {
+        log: "userController.createUser: ERROR: Invalid or unfound required data on res.locals object - Expected res.locals to be an object.",
+        message: {
+          err: "userController.createUser: ERROR: Check server logs for details", err,
+        },
+      }
+    )});
 };
 
 userController.verifyUser = (req, res, next) => {
