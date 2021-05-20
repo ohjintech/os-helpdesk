@@ -11,7 +11,8 @@ body {
 
 #root {
   padding: 30px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .artboard {
@@ -297,4 +298,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.errorMsg {
+  color: red;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: -20px;
 }

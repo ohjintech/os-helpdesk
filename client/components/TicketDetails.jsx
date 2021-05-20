@@ -64,7 +64,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ProblemStatement}
                   variant="outlined"
-                  disabled
                 />
                 </div>
                 <TextField
@@ -73,7 +72,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ExpectedBehavior}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="What I've tried"
@@ -81,7 +79,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.TriedSolution}
                   variant="outlined"
-                  // readOnly={true}
                 />
                 <TextField
                   label="Why I suspect it's not working"
@@ -89,7 +86,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.SuspectedIssue}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Category"
@@ -97,7 +93,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.description}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Zoom Link"
@@ -105,7 +100,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ZoomLink}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Response"
@@ -113,7 +107,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.response ? props.details.response : "Waiting for response"}
                   variant="outlined"
-                  disabled
                 />
               </div>
             </form>

@@ -42,31 +42,30 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
+  }
 }));
 
 export default function SignIn() {
   const history = useHistory();
   const { user, setUser } = useContext(AuthContext);
-
+  const [login, setLogin] = useState();
+  const [error, setError] = useState(false);
+  
   const signInHandler = (e) => {
     e.preventDefault();
-    // fetch(`/user/login`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(login),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log("signin: ", user);
-    //     setUser(data);
-    //     history.push({
-    //       pathname: `/search-spots`
-    //     });
-    //   })
-    history.push({
-      pathname: `/dashboard`
-    });
+    fetch('/login', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(login),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("signin: ", user);
+        setUser(data);
+        history.push({
+          pathname: `/dashboard`
+        });
+      }).catch(err => setError(true))
     console.log('Sign In!');
   }
 
@@ -93,6 +92,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => setLogin({ ...login, username: e.target.value })}
           />
           <TextField
             variant="outlined"
@@ -103,8 +103,10 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="password"
+            onChange={(e) => setLogin({ ...login, password: e.target.value })}
           />
+          {error && <p className="errorMsg">You have entered an invalid username or password.</p>}
           <Button
             type="submit"
             fullWidth
