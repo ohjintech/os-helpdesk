@@ -36,6 +36,7 @@ export default function TicketsList() {
   useEffect(() => {
     fetch('/ticket')
     .then(res => res.json())
+    .then(data => data.reverse())
     .then(data => setTickets(data))
     .catch(err => console.error(err))
   }, [])
@@ -47,10 +48,9 @@ export default function TicketsList() {
           <TableRow>
             <TableCell>Problem Statement</TableCell>
             <TableCell align="right">Category</TableCell>
-            <TableCell align="right">Created by</TableCell>
             <TableCell align="right">Cohort</TableCell>
+            <TableCell align="right">Created by</TableCell>
             <TableCell align="right">Created at</TableCell>
-            <TableCell align="right">Reviewer</TableCell>
             <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
@@ -60,16 +60,16 @@ export default function TicketsList() {
               <TableCell component="th" scope="row">
                 {row.ProblemStatement}
               </TableCell>
-              <TableCell align="right">{row.CategoryID}</TableCell>
-              <TableCell align="right">{row.CategoryID}</TableCell>
-              <TableCell align="right">{row.UserID}</TableCell>
+              <TableCell align="right">{row.description}</TableCell>
+              <TableCell align="right">{row.cohort}</TableCell>
+              <TableCell align="right">{row.username}</TableCell>
               <TableCell align="right">{row.created_at}</TableCell>
-              <TableCell align="right">{row.responderID}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">{row.status ? row.status : "Pending"}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      {console.log(currentModal)}
       {open && <TicketDetails open={open} onClose={handleClose} details={currentModal}/>}
     </TableContainer>
   );
