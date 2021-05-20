@@ -99,9 +99,6 @@ function TicketDetails(props) {
                   variant="outlined"
                   disabled
                 />
-                <a>
-                {props.details.ZoomLink}
-                </a>
                 <TextField
                   label="Zoom Link"
                   multiline
