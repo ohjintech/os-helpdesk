@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+import { AuthContext } from './contexts/Auth';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -27,15 +32,44 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontFamily: 'Helvetica',
     fontSize: '20px'
-  }
+  },
+  button: {
+    margin: theme.spacing(2),
+    marginLeft: 0,
+  },
 }));
 
 function TicketDetails(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState('Controlled');
+  const history = useHistory();
+  const { user, setUser } = useContext(AuthContext);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const deleteTicket = (event) => {
+    console.log('ticket to be updated ', props.details);
+    
+    fetch(`/ticket/${props.details.TicketID}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(() => fetch('/ticket'))
+    .then(res => res.json())
+    .then(() => {
+      props.onClose();
+      props.refresh();
+    })
+    .catch(err => console.log(err))
+  };
+
+  const updateTicket = (event) => {
+    // console.log('ticket to be updated ', props.details);
+
+    // fetch(`/ticket/${props.details.TicketID}`, {
+    //   method: "DELETE",
+    //   headers: { "Content-Type": "application/json" },
+    // })
+    //   .then(() => {
+    //     props.onClose();
+    //   }).catch(err => console.log(err))
   };
   
   return (
@@ -64,7 +98,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ProblemStatement}
                   variant="outlined"
-                  disabled
                 />
                 </div>
                 <TextField
@@ -73,7 +106,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ExpectedBehavior}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="What I've tried"
@@ -81,7 +113,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.TriedSolution}
                   variant="outlined"
-                  // readOnly={true}
                 />
                 <TextField
                   label="Why I suspect it's not working"
@@ -89,7 +120,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.SuspectedIssue}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Category"
@@ -97,7 +127,6 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.description}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Zoom Link"
@@ -105,16 +134,40 @@ function TicketDetails(props) {
                   rowsMax={6}
                   value={props.details.ZoomLink}
                   variant="outlined"
-                  disabled
                 />
                 <TextField
                   label="Response"
                   multiline
                   rowsMax={6}
-                  value={props.details.response ? props.details.response : "Waiting for response"}
+                  placeholder="Fellow, enter your response here"
+                  value={props.details.response ? props.details.response : ''}
+                  onChange={(e) => props.setDetails({ ...props.details, response: e.target.value })}
                   variant="outlined"
-                  disabled
                 />
+                {/* FELLOW & ADMIN */}
+                {user.usertypeID <= 2 && 
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<SaveIcon />}
+                    onClick={updateTicket}
+                  >
+                    Save
+                  </Button>
+                }
+                {/* ADMIN ONLY */}
+                {user.usertypeID === 1 &&
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                    onClick={deleteTicket}
+                  >
+                    Delete
+                  </Button>
+                }
               </div>
             </form>
           </div>

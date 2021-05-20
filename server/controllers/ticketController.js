@@ -180,8 +180,8 @@ ticketController.updateTicket = (req, res, next) => {
 
 // have the option to delete ticket in case something inappropriate gets posted/duplicates get posted
 ticketController.deleteTicket = (req, res, next) => {
-  const { ticketId } = req.body;
-  const queryStr = 'DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1;';
+  const ticketId = [req.params.ticketId]; 
+  const queryStr = `DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1`;
 
   // create async db.query
   db.query(queryStr, ticketId)
