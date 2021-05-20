@@ -1,6 +1,12 @@
 const db = require("../models/db");
 const userController = {};
 
+// creater user
+// updateticket
+// update user
+// delete user
+
+
 // creates a User and posts to db
 userController.createUser = (req, res, next) => {
   // deconstruct request body from front end

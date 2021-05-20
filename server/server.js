@@ -41,12 +41,9 @@ app.get("/cohort", userController.getCohorts, (req, res) => {
 });
 
 // populates dashboard ticket information
-// app.get('/dashboard',
-//   ticketController.getTicketInfo,
-//   (req, res) => {
-//     res.status(200).send(res.locals.ticketInfo)
-//   }
-// );
+// app.get("/dashboard", ticketController.getTicketInfo, (req, res) => {
+//   res.status(200).send(res.locals.ticketInfo);
+// });
 
 // app.get('/secret',  sessionController.verifyCookie,  (req, res) => {
 //   if (res.locals.isCookieValid) res.sendFile(path.join(__dirname, '../views/secret.html'));

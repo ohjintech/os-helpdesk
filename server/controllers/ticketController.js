@@ -92,7 +92,6 @@ ticketController.createTicket = (req, res, next) => {
 // reviewer <-- FK. needs some type of JOIN
 // status
 
-
 // gets detailed information about a ticket to show on the modal
 ticketController.getTicketInfo = (req, res, next) => {
   const queryStr =
@@ -181,7 +180,8 @@ ticketController.updateTicket = (req, res, next) => {
 // have the option to delete ticket in case something inappropriate gets posted/duplicates get posted
 ticketController.deleteTicket = (req, res, next) => {
   const { ticketId } = req.body;
-  const queryStr = 'DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1;';
+  const queryStr =
+    'DELETE FROM "public"."TicketTable" WHERE "TicketID" = $1 RETURNING *;';
 
   // create async db.query
   db.query(queryStr, ticketId)
@@ -204,18 +204,10 @@ ticketController.deleteTicket = (req, res, next) => {
 
 // gets all ticket categories
 ticketController.getCategories = (req, res, next) => {
-  // console.log("ticketController", req);
-  // make a query string (SQL query)
   const queryStr = 'SELECT * FROM "public"."Categories"';
-
   // make an async query using db.query and pass in query string
   db.query(queryStr)
     .then((data) => {
-      // data from the database
-      // console.log('DATA', data.rows);
-      // return next
-      // console.log("retrieved data: ", data.rows);
-      // res.locals.allTickets = data.rows;
       res.locals.categories = data.rows;
       return next();
     })
