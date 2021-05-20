@@ -80,6 +80,21 @@ ticketController.createTicket = (req, res, next) => {
 
 /** READ TICKET FCNS */
 
+// gets basic information about a ticket to show on the dashboard
+// ticketController.getTicketDashInfo = (req, res, next) => {
+// make a query string (SQL query)
+
+// problem statement
+// category <--FK. needs some type of JOIN
+// created by <-- FK. needs some type of JOIN
+// created at
+// cohort <-- FK. needs some type of JOIN
+// reviewer <-- FK. needs some type of JOIN
+// status
+
+//attempting to join responderID with
+//INNER JOIN "public"."UserTable" ON U."UserID" = T."responderID"
+
 // gets detailed information about a ticket to show on the modal
 ticketController.getTicketInfo = (req, res, next) => {
   const queryStr =
