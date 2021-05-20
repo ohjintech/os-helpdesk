@@ -9,7 +9,7 @@ const PORT = 3000;
 const app = express();
 
 const signupRouter = require("./routes/signupRouter");
-// const loginRouter = require('./routes/loginRouter');
+const loginRouter = require('./routes/loginRouter');
 const ticketRouter = require("./routes/ticketRouter");
 const userController = require("./controllers/userController");
 // const sessionController = require('./controllers/sessionController');
@@ -33,7 +33,7 @@ app.get("/categories", ticketController.getCategories, (req, res) => {
  * define route handlers
  */
 app.use("/signup", signupRouter);
-// app.use('/login', loginRouter);
+app.use('/login', loginRouter);
 app.use("/ticket", ticketRouter);
 
 app.get("/cohort", userController.getCohorts, (req, res) => {

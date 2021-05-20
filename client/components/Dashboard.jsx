@@ -4,10 +4,13 @@ import TicketsList from './TicketsList'
 
 
 function Dashboard() {
+  const [searchText, setSearchText] = useState('');
+  
+
   return (
     <div>
-      <PageHeader/>
-      <TicketsList/>
+      <PageHeader searchText={searchText} setSearchText={setSearchText}/>
+      <TicketsList searchText={searchText}/>
     </div>
   )
 }
