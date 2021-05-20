@@ -22,9 +22,9 @@ CREATE TABLE "TicketTable" (
 	"status" TEXT DEFAULT "Open",
 	"response" TEXT,
 	"responderID" int,
-	"created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	"created_at" TIMESTAMP WITH TIME ZONE,
 	"resolved_at" TIMESTAMP WITH TIME ZONE,
-	"image_links" TEXT,
+	"image_links" TEXT NOT NULL,
 	CONSTRAINT "TicketTable_pk" PRIMARY KEY ("TicketID")
 ) WITH (
   OIDS=FALSE

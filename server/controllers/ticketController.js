@@ -50,7 +50,7 @@ ticketController.createTicket = (req, res, next) => {
 
   db.query(getID)
     .then((data) => {
-      console.log("data:", data.rows);
+      // console.log("data:", data.rows);
       console.log("data:", typeof data.rows);
       const { CategoryID } = data.rows[0];
       console.log("CategoryID:", CategoryID);
